@@ -1,14 +1,38 @@
-import { useState } from "react";
-import Input from "./Input.js";
+import React , { useState } from "react";
+import "./App.css";
+import Input from "./Input";
+import PostalData from "./PostalData";
 
-const App = () => {
-    const [loader , setloader] = useState(false);
-    const [searchPAram , setSearchPAram] = useState(null);
+
+
+function App () {
+    const [loader , setLoader] = useState(false);
+
+    const [searchParam , setSearchParam] = useState(null);
     const [response , setResponse] = useState(null);
+    const [isFetch , setIsFetch] = useState(false);
 
   return (
-    <Input setloader={setloader} setSearchPAram={setSearchPAram} setResponse={setResponse}/>
+    <div className="appContainer">
+          { !isFetch ? (
+            <Input 
+              setLoader={setLoader} s
+              setSearchParam={setSearchParam} 
+              setResponse={setResponse} 
+              setIsFetch={setIsFetch}
+          />
+          ) : (
+            <PostalData searchParam = {searchParam} response = {response} />
+          ) }
+
+          {loader && (
+             <center>
+               <div className = "loader"></div>
+
+             </center>
+          )}
+    </div>
   );
-};
+}
 
 export default App;
